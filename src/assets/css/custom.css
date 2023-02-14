@@ -17,5 +17,5 @@ body {
 }
 
 .my-page-title {
-    @apply p-2 mt-1 text-2xl text-cyan-900 font-bold uppercase
+    @apply p-2 mt-0.5 text-2xl text-cyan-900 font-bold uppercase
 }
