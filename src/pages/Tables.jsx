@@ -7,12 +7,14 @@ function Tables() {
     <div>
       <div className='my-page-title'>
         Tables
-      </div>      
-      <DataTable 
-        columns={colonne}
-        data={righe}
-        selectableRows
-      />
+      </div>
+      <div className='bg-neutral-100 p-4 mt-2'> 
+        <DataTable 
+          columns={colonne}
+          data={righe}
+          selectableRows
+        />
+      </div>
     </div>
   )
 }
