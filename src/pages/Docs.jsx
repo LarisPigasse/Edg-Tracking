@@ -2,7 +2,9 @@ import React from 'react'
 
 function Docs() {
   return (
-    <div>Docs</div>
+    <div className='my-page-title'>
+      Docs
+    </div>
   )
 }
 

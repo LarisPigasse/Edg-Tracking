@@ -2,7 +2,9 @@ import React from 'react'
 
 function Tracking() {
   return (
-    <div>Tracking</div>
+    <div className='my-page-title'>
+      Tracking
+    </div>
   )
 }
 

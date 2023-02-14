@@ -8,11 +8,14 @@ body {
     font-family: 'Noto Sans', sans-serif;
 }
 
-.my-nav-x {
-    @apply p-3 font-semibold hover:bg-sky-800 rounded-md ease-linear duration-200;
+.my-sidebar-item {
+    @apply text-gray-600 text-sm gap-x-4 cursor-pointer p-2 mt-2 hover:bg-gray-100 hover:text-cyan-600 rounded-md flex;
 }
 
-.my-nav-y {
-    @apply p-4 border-b border-stone-700 hover:bg-stone-900 ease-linear duration-200;
+.my-sidebar-icon {
+    @apply text-2xl block float-left;
 }
 
+.my-page-title {
+    @apply p-2 mt-1 text-2xl text-cyan-900 font-bold uppercase
+}

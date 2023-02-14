@@ -1,8 +1,13 @@
 import React from 'react'
+import { RiNeteaseCloudMusicLine } from 'react-icons/ri'
+import Sidebar from '../components/Sidebar'
 
-function Home() {
+function Home(props) {
+  console.log(props)
   return (
-    <div>Home</div>
+    <div className='my-page-title'>
+      Homepage
+    </div>
   )
 }
 
