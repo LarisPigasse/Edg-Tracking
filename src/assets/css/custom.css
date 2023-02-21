@@ -8,6 +8,10 @@ body {
     font-family: 'Noto Sans', sans-serif;
 }
 
+.top-arrow {
+    top: 1.1rem;
+}
+
 .my-sidebar-item {
     @apply text-gray-600 text-sm gap-x-4 cursor-pointer p-2 mt-2 hover:bg-gray-100 hover:text-cyan-600 rounded-md flex;
 }
@@ -17,5 +21,5 @@ body {
 }
 
 .my-page-title {
-    @apply p-2 mt-0.5 text-2xl text-cyan-900 font-bold uppercase
+    @apply p-2 pt-0 mt-1 text-2xl text-cyan-900 font-bold uppercase border-b pb-3 flex
 }

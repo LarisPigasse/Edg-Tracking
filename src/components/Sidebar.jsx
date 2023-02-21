@@ -8,9 +8,9 @@ function Sidebar() {
     const [open, setOpen] = useState(true)    
     return (
         <div className={`bg-neutral-200 h-screen ${open ? "w-72" : "w-16"} relative duration-300 w`}>
-            <div className='border border-b-white p-2 pl-3 mt-1'>
+            <div className='border border-b-white p-1 pl-3 mt-0.5'>
                 <BsArrowLeftShort 
-                className={`bg-white text-neutral-900 text-2xl rounded-full absolute -right-3 top-5 
+                className={`bg-white text-neutral-900 text-2xl rounded-full absolute -right-3 top-arrow
                             border border-bg-neutral-700 cursor-pointer ${!open && "rotate-180"}`}
                 onClick={() => setOpen(!open)}
                 />
@@ -50,7 +50,7 @@ function Sidebar() {
                     <div className='hover:text-cyan-600 hover:bg-gray-100 py-2 px-3 rounded cursor-pointer m-1'><HiOutlineCog/></div>
                 </div> 
             </div>                    
-        </div>
+        </div>    
     )
 }
 
