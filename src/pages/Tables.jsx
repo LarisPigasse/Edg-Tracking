@@ -1,6 +1,6 @@
 import React from 'react'
 import DataTable from '../data/MyDataTables';
-import {righe, colonne} from '../data/Test';
+import {righe, colonne} from '../data/test';
 
 function Tables() {
   return (
