@@ -45,8 +45,14 @@ function Clienti() {
 
     return (
         <div className="my-4">
-            <div className=' uppercase font-semibold pl-4'>
-                Clienti
+            <div className='uppercase font-semibold pl-4 flex flex-row'>
+                <div className="basis-1/2 pt-3">Clienti</div>
+                <div className="basis-1/2 text-end">
+                    <button
+                        className="my-button-primary">
+                        Add Cliente
+                    </button>
+                </div>               
             </div>
             <div className='bg-neutral-100 p-4 mt-2'> 
                 <DataTable 

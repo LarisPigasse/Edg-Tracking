@@ -1,7 +1,7 @@
 import {React, useState} from 'react'
 import {BsArrowLeftShort} from 'react-icons/bs'
 import {HiOutlineCog} from 'react-icons/hi'
-import {AiOutlineHome, AiOutlineDashboard, AiOutlineEnvironment, AiOutlineTable, AiOutlineFile, AiOutlineCopyrightCircle} from 'react-icons/ai'
+import {AiOutlineHome, AiOutlineDashboard, AiOutlineEnvironment, AiOutlineTable, AiOutlineFile} from 'react-icons/ai'
 import {Link, Outlet} from 'react-router-dom'
 
 export default function Root() {
@@ -18,7 +18,7 @@ export default function Root() {
               onClick={() => setOpen(!open)}
               />
               <div className='inline-flex'>
-                  <img src="https://tools.expressdeliverygroup.com/assets/img/favicon-192x192.png" className=' w-10 rounded-full cursor-pointer block mr-6' />
+                  <img src="https://tools.expressdeliverygroup.com/assets/img/LogoE.png" className=' w-10 rounded-full cursor-pointer block mr-6' />
                   <span className={`text-2xl mt-1 font-bold text-sky-600 ${!open && "scale-0"}`}>EDG</span>
                   <span className={`ml-2 text-2xl mt-1 font-semibold text-cyan-900 ${!open && "scale-0"}`}>ADMIN</span> 
               </div>

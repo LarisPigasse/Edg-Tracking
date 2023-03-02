@@ -7,23 +7,23 @@ import {Tabs, TabsHeader, TabsBody, Tab, TabPanel} from "@material-tailwind/reac
 
 function Tables() {
 
-  const [attiva, setAttiva] = useState('my-button-tab')
+  const [attiva, setAttiva] = useState('operatori')
 
   return (
     <div>
       <Tabs value="operatori">
         <div className="border-b border-b-neutral-300">
         <TabsHeader className="w-min gap-4 font-semibold">
-          <Tab key="operatori" value="operatori" className={attiva} onClick={() => setAttiva(my-button-tab-active)}>
+          <Tab key="operatori" value="operatori" className={` ${attiva == 'operatori' ? 'my-button-tab-active' : 'my-button-tab'}`} onClick={() => setAttiva('operatori')}>
             Operatori
           </Tab>
-          <Tab key="vettori" value="vettori" className={attiva}>
+          <Tab key="vettori" value="vettori" className={` ${attiva == 'vettori' ? 'my-button-tab-active' : 'my-button-tab'}`} onClick={() => setAttiva('vettori')}>
             Vettori
           </Tab>
-          <Tab key="corrieri" value="corrieri" className={attiva}>
+          <Tab key="corrieri" value="corrieri" className={` ${attiva == 'corrieri' ? 'my-button-tab-active' : 'my-button-tab'}`} onClick={() => setAttiva('corrieri')}>
             Corrieri
           </Tab>
-          <Tab key="clienti" value="clienti" className={attiva}>
+          <Tab key="clienti" value="clienti" className={` ${attiva == 'clienti' ? 'my-button-tab-active' : 'my-button-tab'}`} onClick={() => setAttiva('clienti')}>
             Clienti
           </Tab>
         </TabsHeader>

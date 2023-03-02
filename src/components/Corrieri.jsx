@@ -44,8 +44,14 @@ function Corrieri() {
 
     return (
         <div className="my-4">
-            <div className=' uppercase font-semibold pl-4'>
-                Corrieri
+            <div className='uppercase font-semibold pl-4 flex flex-row'>
+                <div className="basis-1/2 pt-3">Corrieri</div>
+                <div className="basis-1/2 text-end">
+                    <button
+                        className="my-button-primary">
+                        Add Corriere
+                    </button>
+                </div>               
             </div>
             <div className='bg-neutral-100 p-4 mt-2'> 
                 <DataTable 

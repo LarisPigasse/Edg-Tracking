@@ -17,9 +17,13 @@ body {
 }
 
 .my-button-tab {
-    @apply bg-neutral-400 hover:bg-cyan-500 duration-300 text-white px-4 py-2 rounded-md
+    @apply bg-neutral-500 hover:bg-cyan-500 duration-300 text-white px-4 py-2 rounded-md drop-shadow-sm hover:drop-shadow-md mb-1
 }
 
 .my-button-tab-active {
-    @apply bg-red-600 text-white px-4 py-2 rounded-md
+    @apply bg-red-600 text-white px-4 py-2 rounded-md drop-shadow-md mb-1
+}
+
+.my-button-primary {
+    @apply bg-sky-500 hover:bg-sky-600 duration-300 text-white px-4 py-2 rounded-md text-sm drop-shadow-sm hover:drop-shadow-md
 }
