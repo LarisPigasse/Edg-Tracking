@@ -18,7 +18,7 @@ export default function Root() {
               onClick={() => setOpen(!open)}
               />
               <div className='inline-flex'>
-                  <img src="https://tools.expressdeliverygroup.com/assets/img/iniziale-white.png" className=' w-10 p-2 bg-cyan-900 rounded-full cursor-pointer block mr-6' />
+                  <img src="https://tools.expressdeliverygroup.com/assets/img/favicon-192x192.png" className=' w-10 rounded-full cursor-pointer block mr-6' />
                   <span className={`text-2xl mt-1 font-bold text-sky-600 ${!open && "scale-0"}`}>EDG</span>
                   <span className={`ml-2 text-2xl mt-1 font-semibold text-cyan-900 ${!open && "scale-0"}`}>ADMIN</span> 
               </div>

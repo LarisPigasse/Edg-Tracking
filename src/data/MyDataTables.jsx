@@ -2,7 +2,7 @@ import DataTable from 'react-data-table-component';
 import {RiArrowDownFill} from 'react-icons/ri';
 
 const sortIcon = <RiArrowDownFill />;
-const selectProps = { indeterminate: isIndeterminate => isIndeterminate };
+const selectProps = {indeterminate: "false" };
 
 function MyDataTables(props) {
     return (
