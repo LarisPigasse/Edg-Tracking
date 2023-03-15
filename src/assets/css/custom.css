@@ -17,7 +17,7 @@ body {
 }
 
 .my-button-tab {
-    @apply bg-neutral-500 hover:bg-cyan-500 duration-300 text-white px-4 py-2 rounded-md drop-shadow-sm hover:drop-shadow-md mb-1
+    @apply bg-neutral-500 hover:bg-neutral-700 duration-300 text-white px-4 py-2 rounded-md drop-shadow-sm hover:drop-shadow-md mb-1
 }
 
 .my-button-tab-active {
@@ -25,5 +25,24 @@ body {
 }
 
 .my-button-primary {
-    @apply bg-sky-500 hover:bg-sky-600 duration-300 text-white px-4 py-2 rounded-md text-sm drop-shadow-sm hover:drop-shadow-md
+    @apply bg-sky-500 hover:bg-sky-700 duration-300 text-white px-4 py-2 rounded-md text-sm drop-shadow-sm hover:drop-shadow-md
 }
+
+.my-modal-xxl {
+    @apply w-full max-w-6xl transform overflow-hidden rounded-2xl p-6 text-left align-middle shadow-xl transition-all
+}
+
+.my-modal-xl {
+    @apply w-full max-w-4xl transform overflow-hidden rounded-2xl p-6 text-left align-middle shadow-xl transition-all
+}
+
+.my-modal-l {
+    @apply w-full max-w-2xl transform overflow-hidden rounded-2xl p-6 text-left align-middle shadow-xl transition-all
+}
+
+.my-modal-m {
+    @apply w-full max-w-lg transform overflow-hidden rounded-2xl p-6 text-left align-middle shadow-xl transition-all
+}
+
+/* Stile DataTable */
+

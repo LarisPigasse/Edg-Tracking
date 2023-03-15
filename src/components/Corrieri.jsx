@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import DataTable from '../data/MyDataTables';
 import engine from '../engine'
+import ModalCorrieri from "../modals/ModalCorrieri";
 
 function Corrieri() {
     const colCorrieri = [
@@ -25,7 +26,12 @@ function Corrieri() {
             sortable: true,
         },     
     ]
-    
+    const [isOpen, setIsOpen] = useState(false)
+
+    const openModal = () => {
+        setIsOpen(true);
+    }
+        
     const [couriers, setCouriers] = useState([]);
  
     const getCouriers = async () => {
@@ -43,24 +49,29 @@ function Corrieri() {
     }, []);
 
     return (
-        <div className="my-4">
-            <div className='uppercase font-semibold pl-4 flex flex-row'>
-                <div className="basis-1/2 pt-3">Corrieri</div>
-                <div className="basis-1/2 text-end">
-                    <button
-                        className="my-button-primary">
-                        Add Corriere
-                    </button>
-                </div>               
+        <>
+            <div className="my-4">
+                <div className='uppercase font-semibold pl-4 flex flex-row'>
+                    <div className="basis-1/2 pt-3">Corrieri</div>
+                    <div className="basis-1/2 text-end">
+                        <button
+                            type="button"
+                            onClick={openModal}
+                            className="my-button-primary">
+                            Add Corriere
+                        </button>
+                    </div>               
+                </div>
+                <div className='bg-neutral-100 p-4 mt-2'> 
+                    <DataTable 
+                    columns={colCorrieri}
+                    data={couriers}
+                    selectableRows
+                    />
+                </div>             
             </div>
-            <div className='bg-neutral-100 p-4 mt-2'> 
-                <DataTable 
-                columns={colCorrieri}
-                data={couriers}
-                selectableRows
-                />
-            </div>             
-        </div>
+            <ModalCorrieri isOpen={isOpen}  setIsOpen={(bool) => setIsOpen(bool)}/> 
+        </>    
     )
 }
 

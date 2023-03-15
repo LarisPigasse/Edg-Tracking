@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import DataTable from '../data/MyDataTables';
 import engine from '../engine'
+import ModalClienti from "../modals/ModalClienti";
 
 function Clienti() {
 
@@ -27,6 +28,12 @@ function Clienti() {
         },     
     ]
 
+    const [isOpen, setIsOpen] = useState(false)
+
+    const openModal = () => {
+        setIsOpen(true);
+    }
+
     const [customers, setCustomers] = useState([]);
  
     const getCustomers = async () => {
@@ -44,24 +51,29 @@ function Clienti() {
     }, []);
 
     return (
-        <div className="my-4">
-            <div className='uppercase font-semibold pl-4 flex flex-row'>
-                <div className="basis-1/2 pt-3">Clienti</div>
-                <div className="basis-1/2 text-end">
+        <>
+            <div className="my-4">
+                <div className='uppercase font-semibold pl-4 flex flex-row'>
+                    <div className="basis-1/2 pt-3">Clienti</div>
+                    <div className="basis-1/2 text-end">
                     <button
-                        className="my-button-primary">
-                        Add Cliente
-                    </button>
-                </div>               
+                            type="button"
+                            onClick={openModal}
+                            className="my-button-primary">
+                            Add Corriere
+                        </button>
+                    </div>               
+                </div>
+                <div className='bg-neutral-100 p-4 mt-2'> 
+                    <DataTable 
+                    columns={colClienti}
+                    data={customers}
+                    selectableRows
+                    />
+                </div>             
             </div>
-            <div className='bg-neutral-100 p-4 mt-2'> 
-                <DataTable 
-                columns={colClienti}
-                data={customers}
-                selectableRows
-                />
-            </div>             
-        </div>
+            <ModalClienti isOpen={isOpen}  setIsOpen={(bool) => setIsOpen(bool)}/>
+        </>    
     )
 }
 

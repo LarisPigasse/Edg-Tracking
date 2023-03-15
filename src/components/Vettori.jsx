@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import DataTable from '../data/MyDataTables';
 import engine from '../engine'
+import ModalVettori from "../modals/ModalVettori";
 
 function Vettori() {
     const colVettori = [
@@ -26,6 +27,12 @@ function Vettori() {
         },    
     ]
 
+    const [isOpen, setIsOpen] = useState(false)
+
+    const openModal = () => {
+        setIsOpen(true);
+    }
+
     const [carriers, setCarriers] = useState([]);
  
     const getCarriers = async () => {
@@ -43,24 +50,29 @@ function Vettori() {
     }, []);
       
     return (
-        <div className="my-4">
-            <div className='uppercase font-semibold pl-4 flex flex-row'>
-                <div className="basis-1/2 pt-3">Vettori</div>
-                <div className="basis-1/2 text-end">
-                    <button
-                        className="my-button-primary">
-                        Add Vettore
-                    </button>
-                </div>               
+        <>
+            <div className="my-4">
+                <div className='uppercase font-semibold pl-4 flex flex-row'>
+                    <div className="basis-1/2 pt-3">Vettori</div>
+                    <div className="basis-1/2 text-end">
+                        <button
+                            type="button"
+                            onClick={openModal}
+                            className="my-button-primary">
+                            Add Vettore
+                        </button>
+                    </div>               
+                </div>
+                <div className='bg-neutral-100 p-4 mt-2'> 
+                    <DataTable 
+                    columns={colVettori}
+                    data={carriers}
+                    selectableRows
+                    />
+                </div>             
             </div>
-            <div className='bg-neutral-100 p-4 mt-2'> 
-                <DataTable 
-                columns={colVettori}
-                data={carriers}
-                selectableRows
-                />
-            </div>             
-        </div>
+            <ModalVettori isOpen={isOpen}  setIsOpen={(bool) => setIsOpen(bool)}/> 
+        </>
     )
 }
 
