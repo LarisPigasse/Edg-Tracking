@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import DataTable from '../data/MyDataTables';
 import engine from '../engine'
-import ModalCorrieri from "../modals/ModalCorrieri";
+import CorrieriAdd from "../modals/CorrieriAdd";
 
 function Corrieri() {
     const colCorrieri = [
@@ -70,7 +70,7 @@ function Corrieri() {
                     />
                 </div>             
             </div>
-            <ModalCorrieri isOpen={isOpen}  setIsOpen={(bool) => setIsOpen(bool)}/> 
+            <CorrieriAdd isOpen={isOpen}  setIsOpen={(bool) => setIsOpen(bool)}/> 
         </>    
     )
 }

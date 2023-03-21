@@ -1,7 +1,7 @@
 import { Dialog, Transition } from '@headlessui/react'
 import { Fragment } from 'react'
 
-function ModalOperatori({isOpen, setIsOpen}) {
+function CorrieriAdd({isOpen, setIsOpen}) {
 
     function closeModal() {
       setIsOpen(false)
@@ -33,16 +33,16 @@ function ModalOperatori({isOpen, setIsOpen}) {
                 leaveFrom="opacity-100 scale-100"
                 leaveTo="opacity-0 scale-95"
             >
-                <Dialog.Panel className="my-modal-xl bg-white">
+                <Dialog.Panel className="my-modal-l bg-white">
                 <Dialog.Title
                     as="h3"
                     className="text-lg font-medium leading-6 text-gray-900"
                 >
-                    Gestione operatori 
+                    Nuovo corriere 
                 </Dialog.Title>
                 <div className="mt-2">
                     <p className="text-sm text-gray-500">
-                    Questa è la modal per la gestione operatori
+                    Questa è la modal per la gestione dei corrieri
                     </p>
                 </div>
 
@@ -65,4 +65,4 @@ function ModalOperatori({isOpen, setIsOpen}) {
     )
 }
 
-export default ModalOperatori
+export default CorrieriAdd

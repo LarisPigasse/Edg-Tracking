@@ -1,14 +1,14 @@
 import { Dialog, Transition } from '@headlessui/react'
 import { Fragment } from 'react'
 
-function ModalVettori({isOpen, setIsOpen}) {
+function OperatoriSch({isOpenSch, setIsOpenSch, operatore}) {
 
     function closeModal() {
-      setIsOpen(false)
+      setIsOpenSch(false)
     }
   
     return (
-      <Transition appear show={isOpen} as={Fragment}>
+      <Transition appear show={isOpenSch} as={Fragment}>
         <Dialog as="div" className="relative z-10" onClose={closeModal}>
         <Transition.Child
             as={Fragment}
@@ -33,16 +33,16 @@ function ModalVettori({isOpen, setIsOpen}) {
                 leaveFrom="opacity-100 scale-100"
                 leaveTo="opacity-0 scale-95"
             >
-                <Dialog.Panel className="my-modal-m bg-white">
+                <Dialog.Panel className="my-modal-xl bg-white">
                 <Dialog.Title
                     as="h3"
                     className="text-lg font-medium leading-6 text-gray-900"
                 >
-                    Gestione vettori 
+                    Scheda operatore {operatore}
                 </Dialog.Title>
                 <div className="mt-2">
                     <p className="text-sm text-gray-500">
-                    Questa è la modal per la gestione dei vettori
+                    Questa è la modal per la gestione operatori
                     </p>
                 </div>
 
@@ -65,4 +65,4 @@ function ModalVettori({isOpen, setIsOpen}) {
     )
 }
 
-export default ModalVettori
+export default OperatoriSch

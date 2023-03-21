@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import DataTable from '../data/MyDataTables';
 import engine from '../engine'
-import ModalVettori from "../modals/ModalVettori";
+import VettoriAdd from "../modals/VettoriAdd";
 
 function Vettori() {
     const colVettori = [
@@ -71,7 +71,7 @@ function Vettori() {
                     />
                 </div>             
             </div>
-            <ModalVettori isOpen={isOpen}  setIsOpen={(bool) => setIsOpen(bool)}/> 
+            <VettoriAdd isOpen={isOpen}  setIsOpen={(bool) => setIsOpen(bool)}/> 
         </>
     )
 }

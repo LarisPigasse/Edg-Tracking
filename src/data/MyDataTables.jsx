@@ -5,6 +5,28 @@ const sortIcon = <RiArrowDownFill />;
 const selectProps = {indeterminate: "false" }
 
 const MyDataTables = (props) => {
+
+    const customStyles = {
+        rows: {
+            style: {
+                minHeight: '72px', // override the row height
+            },
+        },
+        headCells: {
+            style: {
+                paddingLeft: '8px', // override the cell padding for head cells
+                paddingRight: '8px',
+                minHeight:'48px',
+                background:'#FAFAFA',
+            },
+        },
+        cells: {
+            style: {
+                paddingLeft: '8px', // override the cell padding for data cells
+                paddingRight: '8px',
+            },
+        },
+    };    
     return (
         <DataTable
             pagination
@@ -15,7 +37,8 @@ const MyDataTables = (props) => {
             fixedHeaderScrollHeight="300px"
             responsive
             subHeaderAlign="right"
-            subHeaderWrap            
+            subHeaderWrap
+            customStyles={customStyles}           
             {...props}
         />
     );

@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import DataTable from '../data/MyDataTables';
 import engine from '../engine'
-import ModalClienti from "../modals/ModalClienti";
+import ClientiAdd from "../modals/ClientiAdd";
 
 function Clienti() {
 
@@ -72,7 +72,7 @@ function Clienti() {
                     />
                 </div>             
             </div>
-            <ModalClienti isOpen={isOpen}  setIsOpen={(bool) => setIsOpen(bool)}/>
+            <ClientiAdd isOpen={isOpen}  setIsOpen={(bool) => setIsOpen(bool)}/>
         </>    
     )
 }

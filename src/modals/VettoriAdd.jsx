@@ -1,7 +1,7 @@
 import { Dialog, Transition } from '@headlessui/react'
 import { Fragment } from 'react'
 
-function ModalClienti({isOpen, setIsOpen}) {
+function VettoriAdd({isOpen, setIsOpen}) {
 
     function closeModal() {
       setIsOpen(false)
@@ -33,16 +33,16 @@ function ModalClienti({isOpen, setIsOpen}) {
                 leaveFrom="opacity-100 scale-100"
                 leaveTo="opacity-0 scale-95"
             >
-                <Dialog.Panel className="my-modal-xxl bg-white">
+                <Dialog.Panel className="my-modal-m bg-white">
                 <Dialog.Title
                     as="h3"
                     className="text-lg font-medium leading-6 text-gray-900"
                 >
-                    Gestione clienti 
+                    Nuovo vettore 
                 </Dialog.Title>
                 <div className="mt-2">
                     <p className="text-sm text-gray-500">
-                    Questa è la modal per la gestione dei clienti
+                    Questa è la modal per la gestione dei vettori
                     </p>
                 </div>
 
@@ -65,4 +65,4 @@ function ModalClienti({isOpen, setIsOpen}) {
     )
 }
 
-export default ModalClienti
+export default VettoriAdd

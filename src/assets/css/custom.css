@@ -8,6 +8,8 @@ body {
     font-family: 'Noto Sans', sans-serif;
 }
 
+a:hover {color:#0369a1}
+
 .my-sidebar-item {
     @apply text-gray-600 text-sm gap-x-4 cursor-pointer p-2 mt-2 hover:bg-gray-100 hover:text-cyan-600 rounded-md flex;
 }
