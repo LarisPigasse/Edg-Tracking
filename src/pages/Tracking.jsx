@@ -11,7 +11,7 @@ function Tracking() {
     <div>
       <Tabs value="spedizioni">
         <div className="border-b border-b-neutral-300">
-        <TabsHeader className="w-min gap-4 font-semibold">
+        <TabsHeader className="w-min gap-2 font-semibold">
           <Tab key="spedizioni" value="spedizioni" className={` ${attiva == 'spedizioni' ? 'my-button-tab-active' : 'my-button-tab'}`} onClick={() => setAttiva('spedizioni')}>
             Spedizioni
           </Tab>

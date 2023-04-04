@@ -13,7 +13,7 @@ function Tables() {
     <div>
       <Tabs value="operatori">
         <div className="border-b border-b-neutral-300">
-        <TabsHeader className="w-min gap-4 font-semibold">
+        <TabsHeader className="w-min gap-2 font-semibold">
           <Tab key="operatori" value="operatori" className={` ${attiva == 'operatori' ? 'my-button-tab-active' : 'my-button-tab'}`} onClick={() => setAttiva('operatori')}>
             Operatori
           </Tab>

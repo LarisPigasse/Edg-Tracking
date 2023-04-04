@@ -26,9 +26,18 @@ a:hover {color:#0369a1}
     @apply bg-red-600 text-white px-4 py-2 rounded-md drop-shadow-md mb-1
 }
 
-.my-button-primary {
-    @apply bg-sky-500 hover:bg-sky-700 duration-300 text-white px-4 py-2 rounded-md text-sm drop-shadow-sm hover:drop-shadow-md
+.my-button-add {
+    @apply bg-sky-500 hover:bg-sky-600 duration-300 text-white px-4 py-2 rounded-md text-sm drop-shadow-sm hover:drop-shadow-md
 }
+
+.my-button-mod {
+    @apply inline-flex justify-center mx-1 rounded-md border border-transparent bg-yellow-300 px-4 py-2 text-sm font-medium text-zinc-900 hover:bg-yellow-400 focus:outline-none focus-visible:ring-2 focus-visible:ring-yellow-400 focus-visible:ring-offset-2 drop-shadow-sm hover:drop-shadow-md
+}
+
+.my-button-close {
+    @apply inline-flex justify-center mx-1 rounded-md border border-transparent bg-blue-200 px-4 py-2 text-sm font-medium text-zinc-900 hover:bg-blue-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-300 focus-visible:ring-offset-2 drop-shadow-sm hover:drop-shadow-md
+}
+
 
 .my-modal-xxl {
     @apply w-full max-w-6xl transform overflow-hidden rounded-2xl p-6 text-left align-middle shadow-xl transition-all

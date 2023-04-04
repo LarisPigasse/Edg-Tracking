@@ -2,6 +2,8 @@ import { useState, useEffect } from "react";
 import DataTable from '../data/MyDataTables';
 import engine from '../engine'
 import ClientiAdd from "../modals/ClientiAdd";
+import ClientiSch from "../modals/ClientiSch";
+import {Link} from 'react-router-dom'
 
 function Clienti() {
 
@@ -10,28 +12,42 @@ function Clienti() {
             name: 'ID',
             selector: row => row.id_cliente,
             sortable: true,
+            maxWidth: '4%',
         },
         {
             name: 'CLIENTE',
             selector: row => row.cliente,
             sortable: true,
+            cell: (row, index, column, id) => (<><Link to={''} onClick={() => { openModalSch(); setCliente(row.cliente);}}>{row.cliente}</Link></>),
+            style: {
+                color: "#0EA5E9",
+                fontWeight: "500",
+              },            
         },
         {
             name: 'PARTITA IVA',
             selector: row => row.partita_iva,
             sortable: true,
+            maxWidth: '16%',
         },
         {
             name: 'STATO',
             selector: row => row.stato,
             sortable: true,
+            maxWidth: '4%',
         },     
     ]
 
     const [isOpen, setIsOpen] = useState(false)
+    const [isOpenSch, setIsOpenSch] = useState(false)
+    const [cliente, setCliente] = useState(); 
 
     const openModal = () => {
         setIsOpen(true);
+    }
+
+    const openModalSch = () => {
+        setIsOpenSch(true);
     }
 
     const [customers, setCustomers] = useState([]);
@@ -59,8 +75,8 @@ function Clienti() {
                     <button
                             type="button"
                             onClick={openModal}
-                            className="my-button-primary">
-                            Add Corriere
+                            className="my-button-add">
+                            Add Cliente
                         </button>
                     </div>               
                 </div>
@@ -73,6 +89,7 @@ function Clienti() {
                 </div>             
             </div>
             <ClientiAdd isOpen={isOpen}  setIsOpen={(bool) => setIsOpen(bool)}/>
+            <ClientiSch isOpenSch={isOpenSch} cliente={cliente}  setIsOpenSch={(bool) => setIsOpenSch(bool)}/>
         </>    
     )
 }

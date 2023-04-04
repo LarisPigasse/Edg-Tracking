@@ -2,6 +2,8 @@ import { useState, useEffect } from "react";
 import DataTable from '../data/MyDataTables';
 import engine from '../engine'
 import VettoriAdd from "../modals/VettoriAdd";
+import VettoriSch from "../modals/VettoriSch";
+import {Link} from 'react-router-dom'
 
 function Vettori() {
     const colVettori = [
@@ -9,11 +11,17 @@ function Vettori() {
             name: 'ID',
             selector: row => row.id_vettore,
             sortable: true,
+            maxWidth: '4%',
         },
         {
             name: 'VETTORE',
             selector: row => row.vettore,
             sortable: true,
+            cell: (row, index, column, id) => (<><Link to={''} onClick={() => { openModalSch(); setVettore(row.vettore);}}>{row.vettore}</Link></>),
+            style: {
+                color: "#0EA5E9",
+                fontWeight: "500",
+              },             
         },
         {
             name: 'ENDPOINT',
@@ -24,13 +32,20 @@ function Vettori() {
             name: 'STATO',
             selector: row => row.stato,
             sortable: true,
+            maxWidth: '4%',
         },    
     ]
 
     const [isOpen, setIsOpen] = useState(false)
+    const [isOpenSch, setIsOpenSch] = useState(false)
+    const [vettore, setVettore] = useState();    
 
     const openModal = () => {
         setIsOpen(true);
+    }
+
+    const openModalSch = () => {
+        setIsOpenSch(true);
     }
 
     const [carriers, setCarriers] = useState([]);
@@ -58,7 +73,7 @@ function Vettori() {
                         <button
                             type="button"
                             onClick={openModal}
-                            className="my-button-primary">
+                            className="my-button-add">
                             Add Vettore
                         </button>
                     </div>               
@@ -71,7 +86,8 @@ function Vettori() {
                     />
                 </div>             
             </div>
-            <VettoriAdd isOpen={isOpen}  setIsOpen={(bool) => setIsOpen(bool)}/> 
+            <VettoriAdd isOpen={isOpen}  setIsOpen={(bool) => setIsOpen(bool)}/>
+            <VettoriSch isOpenSch={isOpenSch} vettore={vettore}  setIsOpenSch={(bool) => setIsOpenSch(bool)}/> 
         </>
     )
 }

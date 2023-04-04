@@ -13,7 +13,7 @@ function Operatori() {
             name: 'ID',
             selector: row => row.id_operatore,
             sortable: true,
-            maxWidth: '8%',           
+            maxWidth: '4%',           
         },
         {
             id: 'OPERATORE',
@@ -44,7 +44,7 @@ function Operatori() {
             id: 'STATO',
             name: 'STATO',
             selector: row => row.stato,
-            maxWidth: '8%',
+            maxWidth: '4%',
         },
     ];
     
@@ -84,7 +84,7 @@ function Operatori() {
                         <button 
                             type="button"
                             onClick={openModalAdd}
-                            className="my-button-primary">
+                            className="my-button-add">
                             Add Operatore
                         </button>
                     </div>               

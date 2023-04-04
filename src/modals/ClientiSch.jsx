@@ -1,14 +1,14 @@
 import { Dialog, Transition } from '@headlessui/react'
 import { Fragment } from 'react'
 
-function ClientiAdd({isOpen, setIsOpen}) {
+function ClientiSch({isOpenSch, setIsOpenSch, cliente}) {
 
     function closeModal() {
-      setIsOpen(false)
+      setIsOpenSch(false)
     }
   
     return (
-      <Transition appear show={isOpen} as={Fragment}>
+      <Transition appear show={isOpenSch} as={Fragment}>
         <Dialog as="div" className="relative z-10" onClose={closeModal}>
         <Transition.Child
             as={Fragment}
@@ -33,12 +33,12 @@ function ClientiAdd({isOpen, setIsOpen}) {
                 leaveFrom="opacity-100 scale-100"
                 leaveTo="opacity-0 scale-95"
             >
-                <Dialog.Panel className="my-modal-xxl bg-white">
+                <Dialog.Panel className="my-modal-xl bg-white">
                 <Dialog.Title
                     as="h3"
                     className="text-lg font-medium leading-6 text-gray-900"
                 >
-                    Nuovo cliente 
+                    Scheda cliente {cliente}
                 </Dialog.Title>
                 <div className="mt-2">
                     <p className="text-sm text-gray-500">
@@ -48,12 +48,18 @@ function ClientiAdd({isOpen, setIsOpen}) {
 
                 <div className="mt-4">
                     <button
-                    type="button"
-                    className="my-button-close"
-                    onClick={closeModal}
-                    >
-                    Chiudi
+                        type="button"
+                        className="my-button-close"
+                        onClick={closeModal}
+                        >
+                        Chiudi
                     </button>
+                    <button
+                        type="button"
+                        className="my-button-mod"
+                        >
+                        Modifica
+                    </button>                    
                 </div>
                 </Dialog.Panel>
             </Transition.Child>
@@ -65,4 +71,4 @@ function ClientiAdd({isOpen, setIsOpen}) {
     )
 }
 
-export default ClientiAdd
+export default ClientiSch

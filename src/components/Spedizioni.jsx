@@ -3,9 +3,9 @@ import DataTable from '../data/MyDataTables';
 import engine from '../engine'
 import SpedizioniSch from "../modals/SpedizioniSch";
 import SpedizioniAdd from "../modals/SpedizioniAdd";
+import SpedizioniTrk from "../modals/SpedizioniTrk";
 import {Link} from 'react-router-dom'
-import {RiEdit2Fill} from 'react-icons/ri'
-import { Alignment } from "react-data-table-component";
+
 
 function Spedizioni() {
   const colSpedizioni = [
@@ -15,15 +15,20 @@ function Spedizioni() {
         sortable: true,
     },
     {
-        name: 'SPEDIZIONE',
-        selector: row => row.id_spedizione,
-        sortable: true,
-    },
+      name: 'SPEDIZIONE',
+      selector: row => row.id_spedizione,
+      sortable: true,
+      cell: (row, index, column, id) => (<><Link to={''} onClick={() => { openModalSch(); setSpedizione(row.id_spedizione);}}>{row.id_spedizione}</Link></>),
+      style: {
+          color: "#0EA5E9",
+          fontWeight: "500",
+        },            
+    }, 
     {
       name: 'ALTRO_NUMERO',
       selector: row => row.altro_numero,
       sortable: true,
-      cell: (row, index, column, id) => (<><Link to={''} onClick={() => { openModalSch(); setSpedizione(row.id_spedizione);}}>{row.altro_numero}</Link></>),
+      cell: (row, index, column, id) => (<><Link to={''} onClick={() => { openModalTrk(); setSpedizione(row.id_spedizione);}}>{row.altro_numero}</Link></>),
       style: {
           color: "#0EA5E9",
           fontWeight: "500",
@@ -43,25 +48,14 @@ function Spedizioni() {
       name: 'CORRIERE',
       selector: row => row.corriere,
       sortable: true,
-    },
-    {
-      name: '',
-      selector: row => row.id_spedizione,
-      sortable: true,
-      maxWidth: '2%',
-      cell: (row, index, column, id) => (<><Link to={''} onClick={() => { openModalSch(); setSpedizione(row.id_spedizione);}}><RiEdit2Fill/></Link></>),
-      style: {
-          color: "#AAAAAA",
-          fontWeight: "500",
-          fontSize: "1.2rem",
-        },      
     },         
   ]
 
   const [spedizioni, setSpedizioni] = useState([]);
   const [spedizione, setSpedizione] = useState();
   const [isOpenSch, setIsOpenSch] = useState(false)
-  const [isOpenAdd, setIsOpenAdd] = useState(false) 
+  const [isOpenAdd, setIsOpenAdd] = useState(false)
+  const [isOpenTrk, setIsOpenTrk] = useState(false)  
 
   const openModalAdd = () => {
     setIsOpenAdd(true);
@@ -69,6 +63,10 @@ function Spedizioni() {
 
   const openModalSch = () => {
     setIsOpenSch(true);
+  }
+
+  const openModalTrk = () => {
+    setIsOpenTrk(true);
   }
 
   const getSpedizioni = async () => {
@@ -94,7 +92,7 @@ function Spedizioni() {
                 <button
                     type="button"
                     onClick={openModalAdd}
-                    className="my-button-primary">
+                    className="my-button-add">
                     Add spedizione
                 </button>
             </div>               
@@ -109,6 +107,7 @@ function Spedizioni() {
     </div>
     <SpedizioniAdd isOpenAdd={isOpenAdd}  setIsOpenAdd={(bool) => setIsOpenAdd(bool)}/>
     <SpedizioniSch isOpenSch={isOpenSch} spedizione={spedizione}  setIsOpenSch={(bool) => setIsOpenSch(bool)}/>
+    <SpedizioniTrk isOpenTrk={isOpenTrk} spedizione={spedizione}  setIsOpenTrk={(bool) => setIsOpenTrk(bool)}/>
 </>
   )
 }
