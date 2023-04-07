@@ -49,17 +49,54 @@ function VettoriSch({isOpenSch, setIsOpenSch, vettore}) {
                 <div className="mt-4">
                     <button
                         type="button"
-                        className="my-button-close"
+                        className="my-btn my-btn-close"
                         onClick={closeModal}
                         >
                         Chiudi
                     </button>
                     <button
                         type="button"
-                        className="my-button-mod"
+                        className="my-btn my-btn-mod"
                         >
                         Modifica
-                    </button>                    
+                    </button> 
+                    <button
+                        type="button"
+                        className="my-btn my-btn-open"
+                        onClick={closeModal}
+                        >
+                        Apri
+                    </button>
+                    <button
+                        type="button"
+                        className="my-btn my-btn-save"
+                        >
+                        Salve
+                    </button>
+                    <button
+                        type="button"
+                        className="my-btn my-btn-del"
+                        >
+                        Elimina
+                    </button>
+                    <button
+                        type="button"
+                        className="my-btn my-btn-add"
+                        >
+                        Aggiungi
+                    </button>
+                    <button
+                        type="button"
+                        className="my-btn my-btn-dark"
+                        >
+                        Dark
+                    </button>
+                    <button
+                        type="button"
+                        className="my-btn my-btn-light"
+                        >
+                        Light
+                    </button>                                                                                                                                              
                 </div>
                 </Dialog.Panel>
             </Transition.Child>

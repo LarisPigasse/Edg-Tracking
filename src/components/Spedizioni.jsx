@@ -85,14 +85,14 @@ function Spedizioni() {
 
   return (
     <>
-    <div className="my-4">
+      <div className="my-4">
         <div className='uppercase font-semibold pl-4 flex flex-row'>
             <div className="basis-1/2 pt-3">Spedizioni</div>
             <div className="basis-1/2 text-end">
                 <button
                     type="button"
                     onClick={openModalAdd}
-                    className="my-button-add">
+                    className="my-btn my-btn-add">
                     Add spedizione
                 </button>
             </div>               

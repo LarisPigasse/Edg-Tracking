@@ -18,26 +18,53 @@ a:hover {color:#0369a1}
     @apply text-2xl block float-left;
 }
 
-.my-button-tab {
+.my-tab {
     @apply bg-neutral-500 hover:bg-neutral-700 duration-300 text-white px-4 py-2 rounded-md drop-shadow-sm hover:drop-shadow-md mb-1
 }
 
-.my-button-tab-active {
+.my-tab-active {
     @apply bg-red-600 text-white px-4 py-2 rounded-md drop-shadow-md mb-1
 }
 
-.my-button-add {
-    @apply bg-sky-500 hover:bg-sky-600 duration-300 text-white px-4 py-2 rounded-md text-sm drop-shadow-sm hover:drop-shadow-md
+.my-btn {
+    @apply inline-flex justify-center mx-1 rounded-md border border-transparent px-4 py-2 text-sm font-medium drop-shadow-sm hover:drop-shadow-md duration-300
 }
 
-.my-button-mod {
-    @apply inline-flex justify-center mx-1 rounded-md border border-transparent bg-yellow-300 px-4 py-2 text-sm font-medium text-zinc-900 hover:bg-yellow-400 focus:outline-none focus-visible:ring-2 focus-visible:ring-yellow-400 focus-visible:ring-offset-2 drop-shadow-sm hover:drop-shadow-md
+.my-btn-mod {
+    @apply bg-yellow-400 hover:bg-yellow-500 text-zinc-900 
 }
 
-.my-button-close {
-    @apply inline-flex justify-center mx-1 rounded-md border border-transparent bg-blue-200 px-4 py-2 text-sm font-medium text-zinc-900 hover:bg-blue-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-300 focus-visible:ring-offset-2 drop-shadow-sm hover:drop-shadow-md
+.my-btn-add {
+    @apply bg-sky-500 hover:bg-sky-600 text-white 
 }
 
+.my-btn-open {
+    @apply  bg-fuchsia-500 hover:bg-fuchsia-600 text-white 
+}
+
+.my-btn-del {
+    @apply  bg-red-600 hover:bg-red-700 text-white 
+}
+
+.my-btn-save {
+    @apply  bg-green-500 hover:bg-green-600 text-white 
+}
+
+.my-btn-close {
+    @apply   bg-sky-200 hover:bg-sky-300 text-zinc-900  
+}
+
+.my-btn-dark{
+    @apply  bg-zinc-900 hover:bg-zinc-800 text-white 
+}
+
+.my-btn-light{
+    @apply bg-gray-100 hover:bg-gray-200 text-zinc-900 hover:drop-shadow-sm
+}
+
+.my-modal{
+    @apply w-full transform overflow-hidden rounded-2xl p-6 text-left align-middle shadow-xl transition-all
+}
 
 .my-modal-xxl {
     @apply w-full max-w-6xl transform overflow-hidden rounded-2xl p-6 text-left align-middle shadow-xl transition-all

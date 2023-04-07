@@ -49,7 +49,7 @@ function OperatoriAdd({isOpenAdd, setIsOpenAdd}) {
                 <div className="mt-4">
                     <button
                     type="button"
-                    className="my-button-close"
+                    className="my-btn my-btn-close"
                     onClick={closeModal}
                     >
                     Chiudi

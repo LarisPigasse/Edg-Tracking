@@ -72,7 +72,7 @@ function Corrieri() {
                         <button
                             type="button"
                             onClick={openModal}
-                            className="my-button-add">
+                            className="my-btn my-btn-add">
                             Add Corriere
                         </button>
                     </div>               

@@ -1,6 +1,7 @@
 import {useEffect, useState} from 'react';
 import engine from '../engine'
 import DataTable from '../data/MyDataTables';
+import FileUpload from './FileUpload';
 
 function AggiornaSpedizioni() {
 
@@ -54,21 +55,27 @@ function AggiornaSpedizioni() {
 
   return (
     <>
-
-      <div class="grid grid-cols-3 gap-4">
-        
-        <div class="">Upload aggiornamento</div>
-        <div class="col-span-2">Ultimi aggiornamenti</div>
-
-        <div class=""></div>
-        <div class="col-span-2 bg-neutral-100 p-4 mt-2">
+      <div className="my-4">
+        <div class="bg-white flex flex-col p-8">
+             <FileUpload />        
+        </div>
+        <div className='uppercase font-semibold pl-4 mt-8 flex flex-row'>
+            <div className="basis-1/2 pt-3">Tabella aggiornamenti</div>
+            <div className="basis-1/2 text-end">
+              <button
+                type="button"
+                className="my-btn my-btn-open">
+                Aggiorna
+              </button>  
+            </div>               
+        </div>
+        <div className='bg-neutral-100 p-4 mt-2'> 
           <DataTable 
             columns={colAggiornamenti}
             data={aggiornamenti}
             selectableRows
           />
-        </div>
-      
+        </div> 
       </div>
     </>
   );

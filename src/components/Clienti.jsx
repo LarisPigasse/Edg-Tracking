@@ -75,7 +75,7 @@ function Clienti() {
                     <button
                             type="button"
                             onClick={openModal}
-                            className="my-button-add">
+                            className="my-btn my-btn-add">
                             Add Cliente
                         </button>
                     </div>               

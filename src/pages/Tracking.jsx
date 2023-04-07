@@ -12,10 +12,10 @@ function Tracking() {
       <Tabs value="spedizioni">
         <div className="border-b border-b-neutral-300">
         <TabsHeader className="w-min gap-2 font-semibold">
-          <Tab key="spedizioni" value="spedizioni" className={` ${attiva == 'spedizioni' ? 'my-button-tab-active' : 'my-button-tab'}`} onClick={() => setAttiva('spedizioni')}>
+          <Tab key="spedizioni" value="spedizioni" className={` ${attiva == 'spedizioni' ? 'my-tab-active' : 'my-tab'}`} onClick={() => setAttiva('spedizioni')}>
             Spedizioni
           </Tab>
-          <Tab key="aggiorna" value="aggiorna" className={` ${attiva == 'aggiorna' ? 'my-button-tab-active' : 'my-button-tab'}`} onClick={() => setAttiva('aggiorna')}>
+          <Tab key="aggiorna" value="aggiorna" className={` ${attiva == 'aggiorna' ? 'my-tab-active' : 'my-tab'}`} onClick={() => setAttiva('aggiorna')}>
             Aggiorna
           </Tab>          
         </TabsHeader>

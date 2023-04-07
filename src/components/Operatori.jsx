@@ -84,7 +84,7 @@ function Operatori() {
                         <button 
                             type="button"
                             onClick={openModalAdd}
-                            className="my-button-add">
+                            className="my-btn my-btn-add">
                             Add Operatore
                         </button>
                     </div>               

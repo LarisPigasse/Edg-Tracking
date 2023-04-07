@@ -49,14 +49,14 @@ function SpedizioniSch({isOpenSch, setIsOpenSch, spedizione}) {
                 <div className="mt-4">
                     <button
                         type="button"
-                        className="my-button-close"
+                        className="my-btn my-btn-close"
                         onClick={closeModal}
                         >
                         Chiudi
                     </button>
                     <button
                         type="button"
-                        className="my-button-mod"
+                        className="my-btn my-btn-mod"
                         >
                         Modifica
                     </button>                    
