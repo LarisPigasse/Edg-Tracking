@@ -30,7 +30,7 @@ function FileUpload() {
                 />            
             </div>
             <div class="basis-1/5">
-                <button className='my-btn my-btn-add' onClick={handleUpload}>Carica il file scelto</button>
+                <button className='my-btn my-btn-add' onClick={handleUpload}>Carica il file</button>
             </div>
             <div class="basis-1/5">
 

@@ -71,7 +71,7 @@ function VettoriSch({isOpenSch, setIsOpenSch, vettore}) {
                         type="button"
                         className="my-btn my-btn-save"
                         >
-                        Salve
+                        Salva
                     </button>
                     <button
                         type="button"
