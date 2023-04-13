@@ -1,30 +1,71 @@
-import { useState, useReducer, useEffect} from "react";
-import DataTable from '../data/MyDataTables';
+import { useState, useEffect} from "react";
 import engine from '../engine'
 import OperatoriAdd from "../modals/OperatoriAdd";
 import OperatoriSch from "../modals/OperatoriSch";
-import {Link} from 'react-router-dom'
-import { useReactTable, createColumnHelper, flexRender, getCoreRowModel} from '@tanstack/react-table'
-import TanTable from '../components/TanTable'
+import {Link} from 'react-router-dom';
+import { 
+    useReactTable, 
+    createColumnHelper, 
+    flexRender, 
+    getCoreRowModel, 
+    getSortedRowModel,
+    getFilteredRowModel,
+    getPaginationRowModel,
+    getFacetedRowModel,
+    getFacetedUniqueValues,
+    getFacetedMinMaxValues,
+    sortingFns} 
+from '@tanstack/react-table';
+import { rankItem, compareItems } from "@tanstack/match-sorter-utils"
+import {FaSortUp, FaSortDown, FaMinus} from 'react-icons/fa'
+
+function DebouncedInput({
+    value: initialValue,
+    onChange,
+    debounce = 500,
+    ...props
+  }) {
+    const [value, setValue] = useState(initialValue)
+  
+    useEffect(() => {
+      setValue(initialValue)
+    }, [initialValue])
+  
+    useEffect(() => {
+      const timeout = setTimeout(() => {
+        onChange(value)
+      }, debounce)
+  
+      return () => clearTimeout(timeout)
+    }, [value])
+  
+    return (
+      <input {...props} value={value} onChange={e => setValue(e.target.value)} />
+    )
+}
 
 function Operatori() {
 
     const columnHelper = createColumnHelper()
     const columns = [
         columnHelper.accessor("id_operatore", {
-            cell: info => info.getValue(),
-            header: () => <span>ID</span>,
+            header: () => "id",
+            cell: info => info.getValue(),           
           }),
           columnHelper.accessor("operatore", {
+            header: () => "operatore",
             cell: info => (<Link to={''} className="text-sky-500" onClick={() => { openModalSch(); setOperatore(info.getValue());}}>{info.getValue()} </Link>),
           }),
           columnHelper.accessor("email", {
+            header: () => "email",
             cell: info => info.getValue(),
           }),
           columnHelper.accessor("profilo", {
+            header: () => "profilo",
             cell: info => info.getValue(),
           }),
           columnHelper.accessor("stato", {
+            header: () => "stato",
             cell: info => info.getValue(),
           }),                                                
     ]  
@@ -52,22 +93,86 @@ function Operatori() {
         }
       };    
     
-    useEffect(() => {
-        getUsers();
-    }, []);
+    const fuzzyFilter = (row, columnId, value, addMeta) => {
+        // Rank the item
+        const itemRank = rankItem(row.getValue(columnId), value)
+        // Store the itemRank info
+        addMeta({
+          itemRank
+        })  
+        // Return if the item should be filtered in/out
+        return itemRank.passed
+    }
 
+    const fuzzySort = (rowA, rowB, columnId) => {
+        let dir = 0     
+        // Only sort by rank if the column has ranking information
+        if (rowA.columnFiltersMeta[columnId]) {
+          dir = compareItems(
+            rowA.columnFiltersMeta[columnId]?.itemRank,
+            rowB.columnFiltersMeta[columnId]?.itemRank
+          )
+        }    
+        // Provide an alphanumeric fallback for when the item ranks are equal
+        return dir === 0 ? sortingFns.alphanumeric(rowA, rowB, columnId) : dir
+    } 
+
+    const [sorting, setSorting] = useState([])
+    const [columnFilters, setColumnFilters] = useState([])
+    const [globalFilter, setGlobalFilter] = useState("")    
+    
     const table = useReactTable({
       data,
       columns,
-      getCoreRowModel: getCoreRowModel(),      
-    })
-    
+      state: {
+        sorting
+      },
+      filterFns: {
+        fuzzy: fuzzyFilter
+      },
+      state: {
+        columnFilters,
+        globalFilter
+      },
+      onColumnFiltersChange: setColumnFilters,
+      onGlobalFilterChange: setGlobalFilter,
+      globalFilterFn: fuzzyFilter,      
+      onSortingChange: setSorting,
+      getCoreRowModel: getCoreRowModel(),
+      getSortedRowModel: getSortedRowModel(),
+      getFilteredRowModel: getFilteredRowModel(),
+      getPaginationRowModel: getPaginationRowModel(),      
+      getFacetedRowModel: getFacetedRowModel(),
+      getFacetedUniqueValues: getFacetedUniqueValues(),
+      getFacetedMinMaxValues: getFacetedMinMaxValues(),
+      debugTable: true,
+      debugHeaders: true,
+      debugColumns: false      
+    })  
+
+    useEffect(() => {
+        getUsers();
+        if (table.getState().columnFilters[0]?.id === "fullName") {
+          if (table.getState().sorting[0]?.id !== "fullName") {
+            table.setSorting([{ id: "fullName", desc: false }])
+          }
+        }
+    }, [table.getState().columnFilters[0]?.id])  
+
     return (
         <>
             <div className="my-4">
                 <div className='uppercase font-semibold pl-4 flex flex-row'>
-                    <div className="basis-1/2 pt-3">Operatori</div>
-                    <div className="basis-1/2 text-end">
+                    <div className="basis-1/3 pt-3">Operatori</div>
+                    <div className="basis-1/3 pt-3">
+                        <DebouncedInput
+                        value={globalFilter ?? ""}
+                        onChange={value => setGlobalFilter(String(value))}
+                        className="p-2 font-lg shadow border border-block"
+                        placeholder="Cerca in tutte le colonne"
+                        />
+                    </div>
+                    <div className="basis-1/3 text-end">
                         <button 
                             type="button"
                             onClick={openModalAdd}
@@ -76,22 +181,42 @@ function Operatori() {
                         </button>
                     </div>               
                 </div>
+
                 <div className='bg-neutral-100 p-4 mt-2'> 
                     <table className=" w-full bg-white">
                         <thead>
                         {table.getHeaderGroups().map(headerGroup => (
                             <tr className="bg-gray-50" key={headerGroup.id}>
-                            {headerGroup.headers.map(header => (
-                                <th className="px-2 py-4 text-start uppercase text-xs text-zinc-800 font-semibold border-b border-zinc-300" key={header.id}>
-                                {header.isPlaceholder
-                                    ? null
-                                    : flexRender(
-                                        header.column.columnDef.header.className,
-                                        header.getContext()
+                            {headerGroup.headers.map(header => {
+                                return (
+                                    <th key={header.id} className="px-2 py-4 text-start uppercase text-xs text-zinc-800 font-semibold border-b border-zinc-300">
+                                    {header.isPlaceholder ? null : (
+                                        <div className="flex flex-row">
+                                            <div className="basis-1/2"
+                                                {...{
+                                                    className: header.column.getCanSort()
+                                                    ? "cursor-pointer select-none"
+                                                    : "",
+                                                    onClick: header.column.getToggleSortingHandler()
+                                                }}
+                                                >
+                                                {flexRender(
+                                                    header.column.columnDef.header,
+                                                    header.getContext()
+                                                )}
+                                            </div>
+                                            <div className="basis-1/2 ml-1 text-red-600 text-base">    
+                                                {{
+                                                    asc: <FaSortUp/>,
+                                                    desc: <FaSortDown/>
+                                                }[header.column.getIsSorted()] ?? <span className="invisible"><FaMinus/></span>}
+                                            </div>
+                                        </div>
                                     )}
-                                </th>
-                            ))}
-                            </tr>
+                                    </th>
+                                )
+                            })}
+                            </tr>                            
                         ))}
                         </thead>
                         <tbody>
@@ -106,6 +231,70 @@ function Operatori() {
                         ))}
                         </tbody>
                     </table>
+                    <div className="grid text-sm mt-2 justify-items-end">
+                        <div className="flex gap-1">
+                        <button
+                            className="border rounded p-1 hover:bg-white min-w-[24px]"
+                            onClick={() => table.setPageIndex(0)}
+                            disabled={!table.getCanPreviousPage()}
+                            >
+                            {"<<"}
+                        </button>
+                        <button
+                            className="border rounded p-1  hover:bg-white min-w-[24px]"
+                            onClick={() => table.previousPage()}
+                            disabled={!table.getCanPreviousPage()}
+                            >
+                            {"<"}
+                        </button>
+                        <button
+                            className="border rounded p-1  hover:bg-white min-w-[24px]"
+                            onClick={() => table.nextPage()}
+                            disabled={!table.getCanNextPage()}
+                            >
+                            {">"}
+                        </button>
+                        <button
+                            className="border rounded p-1  hover:bg-white min-w-[24px]"
+                            onClick={() => table.setPageIndex(table.getPageCount() - 1)}
+                            disabled={!table.getCanNextPage()}
+                            >
+                            {">>"}
+                        </button>
+                        <span className="flex items-center gap-1 ml-2">
+                            <div>Pagine</div>
+                            <strong>
+                                {table.getState().pagination.pageIndex + 1} of{" "}
+                                {table.getPageCount()}
+                            </strong>
+                        </span>
+                        <span className="flex items-center gap-1">
+                            | Vai a pagina:
+                            <input
+                                type="number"
+                                defaultValue={table.getState().pagination.pageIndex + 1}
+                                onChange={e => {
+                                const page = e.target.value ? Number(e.target.value) - 1 : 0
+                                table.setPageIndex(page)
+                                }}
+                                className="border p-1 rounded w-16"
+                            />
+                        </span>
+                        <select
+                            className="px-2"
+                            value={table.getState().pagination.pageSize}
+                            onChange={e => {
+                                table.setPageSize(Number(e.target.value))
+                            }}
+                            >
+                            {[8, 16, 32, 64].map(pageSize => (
+                                <option key={pageSize} value={pageSize}>
+                                Vedi {pageSize}
+                                </option>
+                            ))}
+                        </select>
+                        </div>                                                                        
+                    </div>
                 </div>               
             </div>
             <OperatoriAdd isOpenAdd={isOpenAdd}  setIsOpenAdd={(bool) => setIsOpenAdd(bool)}/>

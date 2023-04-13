@@ -1,7 +1,6 @@
-import React from 'react'
 import { useReactTable, createColumnHelper, flexRender, getCoreRowModel} from '@tanstack/react-table'
 
-function TanTable(props) {
+function MyTable(props) {
   return (
         <>
         <table className=" w-full bg-white">
@@ -37,4 +36,4 @@ function TanTable(props) {
   )
 }
 
-export default TanTable
+export default MyTable
