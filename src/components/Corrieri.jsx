@@ -4,6 +4,7 @@ import engine from '../engine'
 import CorrieriAdd from "../modals/CorrieriAdd";
 import CorrieriSch from "../modals/CorrieriSch";
 import {Link} from 'react-router-dom'
+import Button from '../components/Button'
 
 function Corrieri() {
     const colCorrieri = [
@@ -69,12 +70,7 @@ function Corrieri() {
                 <div className='uppercase font-semibold pl-4 flex flex-row'>
                     <div className="basis-1/2 pt-3">Corrieri</div>
                     <div className="basis-1/2 text-end">
-                        <button
-                            type="button"
-                            onClick={openModal}
-                            className="my-btn my-btn-add">
-                            Add Corriere
-                        </button>
+                        <Button  variant="add" text="Add Corriere" onClick={openModal}/>
                     </div>               
                 </div>
                 <div className='bg-neutral-100 p-4 mt-2'> 

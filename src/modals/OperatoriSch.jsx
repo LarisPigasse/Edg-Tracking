@@ -1,5 +1,6 @@
 import { Dialog, Transition } from '@headlessui/react'
 import { Fragment } from 'react'
+import Button from '../components/Button';
 
 function OperatoriSch({isOpenSch, setIsOpenSch, operatore}) {
 
@@ -47,19 +48,8 @@ function OperatoriSch({isOpenSch, setIsOpenSch, operatore}) {
                 </div>
 
                 <div className="mt-4">
-                    <button
-                        type="button"
-                        className="my-btn my-btn-close"
-                        onClick={closeModal}
-                        >
-                        Chiudi
-                    </button>
-                    <button
-                        type="button"
-                        className="my-btn my-btn-mod"
-                        >
-                        Modifica
-                    </button>                    
+                    <Button variant="close" onClick={closeModal}/>
+                    <Button variant="mod"/>                   
                 </div>
                 </Dialog.Panel>
             </Transition.Child>

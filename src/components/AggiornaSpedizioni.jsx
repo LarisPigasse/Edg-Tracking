@@ -1,7 +1,8 @@
 import {useEffect, useState} from 'react';
-import engine from '../engine'
+import engine from '../engine';
 import DataTable from '../data/MyDataTables';
 import FileUpload from './FileUpload';
+import Button from '../components/Button';
 
 function AggiornaSpedizioni() {
 
@@ -62,11 +63,7 @@ function AggiornaSpedizioni() {
         <div className='uppercase font-semibold pl-4 mt-8 flex flex-row'>
             <div className="basis-1/2 pt-3">Tabella aggiornamenti</div>
             <div className="basis-1/2 text-end">
-              <button
-                type="button"
-                className="my-btn my-btn-open">
-                Aggiorna
-              </button>  
+              <Button variant="open" text="Aggiorna" />
             </div>               
         </div>
         <div className='bg-neutral-100 p-4 mt-2'> 

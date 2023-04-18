@@ -4,6 +4,7 @@ import engine from '../engine'
 import VettoriAdd from "../modals/VettoriAdd";
 import VettoriSch from "../modals/VettoriSch";
 import {Link} from 'react-router-dom'
+import Button from "./Button";
 
 function Vettori() {
     const colVettori = [
@@ -70,12 +71,7 @@ function Vettori() {
                 <div className='uppercase font-semibold pl-4 flex flex-row'>
                     <div className="basis-1/2 pt-3">Vettori</div>
                     <div className="basis-1/2 text-end">
-                        <button
-                            type="button"
-                            onClick={openModal}
-                            className="my-btn my-btn-add">
-                            Add Vettore
-                        </button>
+                        <Button  variant="add" onClick={openModal} text="Add Vettore"/>
                     </div>               
                 </div>
                 <div className='bg-neutral-100 p-4 mt-2'> 

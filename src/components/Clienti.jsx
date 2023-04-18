@@ -4,6 +4,7 @@ import engine from '../engine'
 import ClientiAdd from "../modals/ClientiAdd";
 import ClientiSch from "../modals/ClientiSch";
 import {Link} from 'react-router-dom'
+import Button from '../components/Button'
 
 function Clienti() {
 
@@ -72,12 +73,7 @@ function Clienti() {
                 <div className='uppercase font-semibold pl-4 flex flex-row'>
                     <div className="basis-1/2 pt-3">Clienti</div>
                     <div className="basis-1/2 text-end">
-                    <button
-                            type="button"
-                            onClick={openModal}
-                            className="my-btn my-btn-add">
-                            Add Cliente
-                        </button>
+                        <Button variant="add" text="Add cliente" onClick={openModal}/>
                     </div>               
                 </div>
                 <div className='bg-neutral-100 p-4 mt-2'> 

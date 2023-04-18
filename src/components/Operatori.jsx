@@ -3,20 +3,19 @@ import engine from '../engine'
 import OperatoriAdd from "../modals/OperatoriAdd";
 import OperatoriSch from "../modals/OperatoriSch";
 import {Link} from 'react-router-dom';
+import Button from '../components/Button';
+
 import { 
     useReactTable, 
     createColumnHelper, 
     flexRender, 
     getCoreRowModel, 
     getSortedRowModel,
-    getFilteredRowModel,
     getPaginationRowModel,
     getFacetedRowModel,
     getFacetedUniqueValues,
-    getFacetedMinMaxValues,
-    sortingFns} 
+    getFacetedMinMaxValues,} 
 from '@tanstack/react-table';
-import { rankItem, compareItems } from "@tanstack/match-sorter-utils"
 import {FaSortUp, FaSortDown, FaMinus} from 'react-icons/fa'
 
 function DebouncedInput({
@@ -93,54 +92,17 @@ function Operatori() {
         }
       };    
     
-    const fuzzyFilter = (row, columnId, value, addMeta) => {
-        // Rank the item
-        const itemRank = rankItem(row.getValue(columnId), value)
-        // Store the itemRank info
-        addMeta({
-          itemRank
-        })  
-        // Return if the item should be filtered in/out
-        return itemRank.passed
-    }
-
-    const fuzzySort = (rowA, rowB, columnId) => {
-        let dir = 0     
-        // Only sort by rank if the column has ranking information
-        if (rowA.columnFiltersMeta[columnId]) {
-          dir = compareItems(
-            rowA.columnFiltersMeta[columnId]?.itemRank,
-            rowB.columnFiltersMeta[columnId]?.itemRank
-          )
-        }    
-        // Provide an alphanumeric fallback for when the item ranks are equal
-        return dir === 0 ? sortingFns.alphanumeric(rowA, rowB, columnId) : dir
-    } 
-
     const [sorting, setSorting] = useState([])
-    const [columnFilters, setColumnFilters] = useState([])
-    const [globalFilter, setGlobalFilter] = useState("")    
-    
+
     const table = useReactTable({
       data,
       columns,
       state: {
         sorting
       },
-      filterFns: {
-        fuzzy: fuzzyFilter
-      },
-      state: {
-        columnFilters,
-        globalFilter
-      },
-      onColumnFiltersChange: setColumnFilters,
-      onGlobalFilterChange: setGlobalFilter,
-      globalFilterFn: fuzzyFilter,      
       onSortingChange: setSorting,
       getCoreRowModel: getCoreRowModel(),
       getSortedRowModel: getSortedRowModel(),
-      getFilteredRowModel: getFilteredRowModel(),
       getPaginationRowModel: getPaginationRowModel(),      
       getFacetedRowModel: getFacetedRowModel(),
       getFacetedUniqueValues: getFacetedUniqueValues(),
@@ -152,33 +114,16 @@ function Operatori() {
 
     useEffect(() => {
         getUsers();
-        if (table.getState().columnFilters[0]?.id === "fullName") {
-          if (table.getState().sorting[0]?.id !== "fullName") {
-            table.setSorting([{ id: "fullName", desc: false }])
-          }
-        }
-    }, [table.getState().columnFilters[0]?.id])  
+    }, [])  
 
     return (
         <>
             <div className="my-4">
                 <div className='uppercase font-semibold pl-4 flex flex-row'>
-                    <div className="basis-1/3 pt-3">Operatori</div>
-                    <div className="basis-1/3 pt-3">
-                        <DebouncedInput
-                        value={globalFilter ?? ""}
-                        onChange={value => setGlobalFilter(String(value))}
-                        className="p-2 font-lg shadow border border-block"
-                        placeholder="Cerca in tutte le colonne"
-                        />
-                    </div>
-                    <div className="basis-1/3 text-end">
-                        <button 
-                            type="button"
-                            onClick={openModalAdd}
-                            className="my-btn my-btn-add">
-                            Add Operatore
-                        </button>
+                    <div className="basis-1/2 pt-3">Operatori</div>
+
+                    <div className="basis-1/2 text-end">
+                        <Button variant="add" text="Add Operatore" onClick={openModalAdd}/>
                     </div>               
                 </div>
 
@@ -264,7 +209,7 @@ function Operatori() {
                         <span className="flex items-center gap-1 ml-2">
                             <div>Pagine</div>
                             <strong>
-                                {table.getState().pagination.pageIndex + 1} of{" "}
+                                {table.getState().pagination.pageIndex + 1} di{" "}
                                 {table.getPageCount()}
                             </strong>
                         </span>
@@ -301,7 +246,6 @@ function Operatori() {
             <OperatoriSch isOpenSch={isOpenSch} operatore={operatore}  setIsOpenSch={(bool) => setIsOpenSch(bool)}/>          
         </>
     )
-
 
 }
 

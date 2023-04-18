@@ -1,5 +1,6 @@
 import { Dialog, Transition } from '@headlessui/react'
 import { Fragment } from 'react'
+import Button from '../components/Button'
 
 function CorrieriAdd({isOpen, setIsOpen}) {
 
@@ -47,13 +48,7 @@ function CorrieriAdd({isOpen, setIsOpen}) {
                 </div>
 
                 <div className="mt-4">
-                    <button
-                    type="button"
-                    className="my-btn my-btn-close"
-                    onClick={closeModal}
-                    >
-                    Chiudi
-                    </button>
+                    <Button variant="close" onClick={closeModal}/>
                 </div>
                 </Dialog.Panel>
             </Transition.Child>

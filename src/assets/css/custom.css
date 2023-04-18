@@ -10,56 +10,12 @@ body {
 
 a:hover {color:#0369a1}
 
-.my-sidebar-item {
-    @apply text-gray-600 text-sm gap-x-4 cursor-pointer p-2 mt-2 hover:bg-gray-100 hover:text-cyan-600 rounded-md flex;
-}
-
-.my-sidebar-icon {
-    @apply text-2xl block float-left;
-}
-
 .my-tab {
     @apply bg-neutral-500 hover:bg-neutral-700 duration-300 text-white px-4 py-2 rounded-md drop-shadow-sm hover:drop-shadow-md mb-1
 }
 
 .my-tab-active {
     @apply bg-red-600 text-white px-4 py-2 rounded-md drop-shadow-md mb-1
-}
-
-.my-btn {
-    @apply inline-flex justify-center mx-1 rounded-md border border-transparent px-4 py-2 text-sm font-medium drop-shadow-sm hover:drop-shadow-md duration-300
-}
-
-.my-btn-mod {
-    @apply bg-yellow-400 hover:bg-yellow-500 text-zinc-900 
-}
-
-.my-btn-add {
-    @apply bg-sky-500 hover:bg-sky-600 text-white 
-}
-
-.my-btn-open {
-    @apply  bg-fuchsia-500 hover:bg-fuchsia-600 text-white 
-}
-
-.my-btn-del {
-    @apply  bg-red-600 hover:bg-red-700 text-white 
-}
-
-.my-btn-save {
-    @apply  bg-green-500 hover:bg-green-600 text-white 
-}
-
-.my-btn-close {
-    @apply   bg-sky-200 hover:bg-sky-300 text-zinc-900  
-}
-
-.my-btn-dark{
-    @apply  bg-zinc-900 hover:bg-zinc-800 text-white 
-}
-
-.my-btn-light{
-    @apply bg-gray-100 hover:bg-gray-200 text-zinc-900 hover:drop-shadow-sm
 }
 
 .my-modal{

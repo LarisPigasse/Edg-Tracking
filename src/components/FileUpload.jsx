@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import axios from 'axios';
 import engine from '../engine'
+import Button from '../components/Button'
 
 function FileUpload() {
 
@@ -30,7 +31,7 @@ function FileUpload() {
                 />            
             </div>
             <div class="basis-1/5">
-                <button className='my-btn my-btn-add' onClick={handleUpload}>Carica il file</button>
+                <Button cvariant='add' onClick={handleUpload} text="Carica il file"/>
             </div>
             <div class="basis-1/5">
 

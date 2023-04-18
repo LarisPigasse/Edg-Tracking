@@ -1,5 +1,6 @@
 import { Dialog, Transition } from '@headlessui/react'
 import { Fragment } from 'react'
+import Button from '../components/Button'
 
 function VettoriSch({isOpenSch, setIsOpenSch, vettore}) {
 
@@ -47,56 +48,14 @@ function VettoriSch({isOpenSch, setIsOpenSch, vettore}) {
                 </div>
 
                 <div className="mt-4">
-                    <button
-                        type="button"
-                        className="my-btn my-btn-close"
-                        onClick={closeModal}
-                        >
-                        Chiudi
-                    </button>
-                    <button
-                        type="button"
-                        className="my-btn my-btn-mod"
-                        >
-                        Modifica
-                    </button> 
-                    <button
-                        type="button"
-                        className="my-btn my-btn-open"
-                        onClick={closeModal}
-                        >
-                        Apri
-                    </button>
-                    <button
-                        type="button"
-                        className="my-btn my-btn-save"
-                        >
-                        Salva
-                    </button>
-                    <button
-                        type="button"
-                        className="my-btn my-btn-del"
-                        >
-                        Elimina
-                    </button>
-                    <button
-                        type="button"
-                        className="my-btn my-btn-add"
-                        >
-                        Aggiungi
-                    </button>
-                    <button
-                        type="button"
-                        className="my-btn my-btn-dark"
-                        >
-                        Dark
-                    </button>
-                    <button
-                        type="button"
-                        className="my-btn my-btn-light"
-                        >
-                        Light
-                    </button>                                                                                                                                              
+                    <Button  variant="close" onClick={closeModal}/>
+                    <Button  variant="mod"/>
+                    <Button  variant="open"/>
+                    <Button  variant="save"/>
+                    <Button  variant="del"/>
+                    <Button  variant="add">Aggiungi</Button>
+                    <Button  variant="dark"/>
+                    <Button  variant="light" text="Light" /> 
                 </div>
                 </Dialog.Panel>
             </Transition.Child>
