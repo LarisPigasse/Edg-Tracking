@@ -85,7 +85,7 @@ function Clienti() {
                 </div>             
             </div>
             <ClientiAdd isOpen={isOpen}  setIsOpen={(bool) => setIsOpen(bool)}/>
-            <ClientiSch isOpenSch={isOpenSch} cliente={cliente}  setIsOpenSch={(bool) => setIsOpenSch(bool)}/>
+            <ClientiSch isOpenSch={isOpenSch} titolo={cliente}  setIsOpenSch={(bool) => setIsOpenSch(bool)}/>
         </>    
     )
 }

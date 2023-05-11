@@ -6,6 +6,10 @@ module.exports = {
   ],
   theme: {
     container: {center: true},
+    fontFamily: {
+      sans: ['Noto Sans', 'sans-serif'],
+      serif: ['Noto Sans', 'serif'],
+    },   
   },
   plugins: [],
 }

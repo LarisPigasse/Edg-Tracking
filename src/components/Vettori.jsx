@@ -1,42 +1,35 @@
 import { useState, useEffect } from "react";
-import DataTable from '../data/MyDataTables';
 import engine from '../engine'
 import VettoriAdd from "../modals/VettoriAdd";
 import VettoriSch from "../modals/VettoriSch";
 import {Link} from 'react-router-dom'
 import Button from "./Button";
+import {createColumnHelper} from '@tanstack/react-table';
+import MyTable from "./table/MyTable";
 
 function Vettori() {
-    const colVettori = [
-        {
-            name: 'ID',
-            selector: row => row.id_vettore,
-            sortable: true,
-            maxWidth: '4%',
-        },
-        {
-            name: 'VETTORE',
-            selector: row => row.vettore,
-            sortable: true,
-            cell: (row, index, column, id) => (<><Link to={''} onClick={() => { openModalSch(); setVettore(row.vettore);}}>{row.vettore}</Link></>),
-            style: {
-                color: "#0EA5E9",
-                fontWeight: "500",
-              },             
-        },
-        {
-            name: 'ENDPOINT',
-            selector: row => row.endpoint,
-            sortable: true,
-        },
-        {
-            name: 'STATO',
-            selector: row => row.stato,
-            sortable: true,
-            maxWidth: '4%',
-        },    
-    ]
 
+    const columnHelper = createColumnHelper()
+    const columns = [
+        columnHelper.accessor("id_vettore", {
+            header: () => "id",
+            cell: info => info.getValue(),           
+          }),
+          columnHelper.accessor("vettore", {
+            header: () => "vettore",
+            cell: info => (<Link to={''} className="text-sky-500" onClick={() => { openModalSch(); setVettore(info.getValue());}}>{info.getValue()} </Link>),
+          }),
+          columnHelper.accessor("endpoint", {
+            header: () => "endpoint",
+            cell: info => info.getValue(),
+          }),
+          columnHelper.accessor("stato", {
+            header: () => "stato",
+            cell: info => info.getValue(),
+          }),                                                
+    ]    
+
+    const endpoint = '/carriers';
     const [isOpen, setIsOpen] = useState(false)
     const [isOpenSch, setIsOpenSch] = useState(false)
     const [vettore, setVettore] = useState();    
@@ -49,21 +42,6 @@ function Vettori() {
         setIsOpenSch(true);
     }
 
-    const [carriers, setCarriers] = useState([]);
- 
-    const getCarriers = async () => {
-      try {
-        const response = await fetch(engine.backend+'/carriers');
-        const data = await response.json();
-        setCarriers(data);
-      } catch (err) {
-        console.log(err);
-      }
-    };
-  
-    useEffect(() => {
-      getCarriers()
-    }, []);
       
     return (
         <>
@@ -75,11 +53,7 @@ function Vettori() {
                     </div>               
                 </div>
                 <div className='bg-neutral-100 p-4 mt-2'> 
-                    <DataTable 
-                    columns={colVettori}
-                    data={carriers}
-                    selectableRows
-                    />
+                    <MyTable columns={columns} endpoint={endpoint}/>
                 </div>             
             </div>
             <VettoriAdd isOpen={isOpen}  setIsOpen={(bool) => setIsOpen(bool)}/>

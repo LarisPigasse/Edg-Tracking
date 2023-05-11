@@ -1,5 +1,5 @@
 import {useState} from 'react'
-import { Outlet} from 'react-router-dom'
+import {Outlet} from 'react-router-dom'
 import Sidebar from './components/menu/Sidebar';
 
 export default function Root() {

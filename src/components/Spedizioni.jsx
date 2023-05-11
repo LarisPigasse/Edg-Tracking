@@ -5,6 +5,7 @@ import SpedizioniSch from "../modals/SpedizioniSch";
 import SpedizioniAdd from "../modals/SpedizioniAdd";
 import SpedizioniTrk from "../modals/SpedizioniTrk";
 import {Link} from 'react-router-dom'
+import Button from '../components/Button'
 
 
 function Spedizioni() {
@@ -89,12 +90,7 @@ function Spedizioni() {
         <div className='uppercase font-semibold pl-4 flex flex-row'>
             <div className="basis-1/2 pt-3">Spedizioni</div>
             <div className="basis-1/2 text-end">
-                <button
-                    type="button"
-                    onClick={openModalAdd}
-                    className="my-btn my-btn-add">
-                    Add spedizione
-                </button>
+              <Button  variant="add" text="Add Corriere" onClick={openModalAdd}/>
             </div>               
         </div>
         <div className='bg-neutral-100 p-4 mt-2'> 
