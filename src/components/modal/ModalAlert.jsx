@@ -2,13 +2,14 @@ import { Fragment } from 'react'
 import { Dialog, Transition } from '@headlessui/react'
 import { XMarkIcon, CheckCircleIcon, InformationCircleIcon, XCircleIcon, ExclamationTriangleIcon, QuestionMarkCircleIcon } from '@heroicons/react/24/outline'
 
-import Button from '../Button'
+import Button from '../ButtonGP'
 
 export default function ModalAlert(props) {
 
     const { open, title, message, confirmText, cancelText, onClose, onConfirm,
             onDeny, denyText, ButtonDeny, icona, typeIcona, setShowAlert, showAlert,
             ButtonConfirm, ButtonClose,
+            buttonVariantConfirm, buttonVariantClose, buttonVariantDeny,
             w, children } = props
 
     const jsonWidth = {
@@ -100,7 +101,7 @@ export default function ModalAlert(props) {
                 <div className="mt-4 flex justify-end mx-4">
                   {
                     ButtonClose ? ButtonClose : <Button type="button"
-                    variant="base"
+                    variant={buttonVariantClose}
                     text={cancelText}
                     onClick={ onClose}
                     className="mr-2"
@@ -109,7 +110,7 @@ export default function ModalAlert(props) {
 
                   {
                         onDeny && !ButtonDeny && <Button type="button"
-                            variant="base"
+                            variant={buttonVariantDeny}
                             onClick={onDeny}
                             text={denyText}
                             className="ml-2"
@@ -120,7 +121,7 @@ export default function ModalAlert(props) {
 
                   {
                         onConfirm && !ButtonConfirm && <Button type="button"
-                            variant="primary"
+                            variant={buttonVariantConfirm}
                             onClick={onConfirm}
                             text={confirmText}
                             className="ml-1"
@@ -138,4 +139,10 @@ export default function ModalAlert(props) {
       </Dialog>
     </Transition.Root>
   )
+}
+
+ModalAlert.defaultProps = {
+  buttonVariantConfirm: 'primary',
+  buttonVariantDeny: 'red',
+  buttonVariantClose: 'base'
 }

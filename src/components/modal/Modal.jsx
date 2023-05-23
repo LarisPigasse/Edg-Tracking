@@ -12,6 +12,7 @@ export default function Modal({ children, open, setOpen, title, w = 'm', classHe
         'l':'max-w-2xl',
         'xl':'max-w-4xl',
         'xxl':'max-w-6xl',
+        'xxxl':'max-w-8xl',
         'full':'max-w-full'
     }
 

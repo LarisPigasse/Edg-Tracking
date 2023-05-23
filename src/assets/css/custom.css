@@ -4,6 +4,12 @@
 @tailwind components;
 @tailwind utilities;
 
+.my-table-bordered th,
+.my-table-bordered td,
+.my-table-bordered tr {
+  @apply border
+}
+
 a:hover {color:#0369a1}
 
 .my-tab {
