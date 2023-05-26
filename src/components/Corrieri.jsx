@@ -1,89 +1,118 @@
-import { useState, useEffect } from "react";
-import DataTable from '../data/MyDataTables';
-import engine from '../engine'
-import CorrieriAdd from "../modals/CorrieriAdd";
-import CorrieriSch from "../modals/CorrieriSch";
-import {Link} from 'react-router-dom'
-import Button from '../components/Button'
+import { useEffect, useState } from "react"
+import DataTable from "../components/DataTable"
+import Dropdown from "../components/Dropdown"
+import ModalCorrieri from "../components/modal/ModalCorrieri"
+import { EllipsisVerticalIcon} from '@heroicons/react/24/solid'
+import {FaRegEdit, FaRegTrashAlt} from 'react-icons/fa'
+import clientAxios from "../config/clientAxios"
 
 function Corrieri() {
-    const colCorrieri = [
-        {
-            name: 'ID',
-            selector: row => row.id_corriere,
-            sortable: true,
-            maxWidth: '4%',
-        },
-        {
-            name: 'CORRIERE',
-            selector: row => row.corriere,
-            sortable: true,
-            cell: (row, index, column, id) => (<><Link to={''} onClick={() => { openModalSch(); setCorriere(row.corriere);}}>{row.corriere}</Link></>),
-            style: {
-                color: "#0EA5E9",
-                fontWeight: "500",
-              },            
-        },
-        {
-            name: 'VETTORE',
-            selector: row => row.vettore,
-            sortable: true,
-        },
-        {
-            name: 'STATO',
-            selector: row => row.stato,
-            sortable: true,
-            maxWidth: '4%',
-        },     
-    ]
-    const [isOpen, setIsOpen] = useState(false)
-    const [isOpenSch, setIsOpenSch] = useState(false)
-    const [corriere, setCorriere] = useState();     
+    const [open, setOpen] = useState(false);
+    const [datiForm, setDatiForm] = useState({})
+    const [corrieri, setCorrieri] = useState([])
 
-    const openModal = () => {
-        setIsOpen(true);
+    const columns = [
+        {
+          header: "id",
+          accessorFn: row => row.id_corriere,
+          footer: props => props.column.id,
+        },
+        {
+          header: "corriere",
+          accessorFn: row => row.corriere,
+          footer: props => props.column.id,
+        },
+        {
+          header: "vettore",
+          accessorFn: row => row.vettore,
+          footer: props => props.column.id,
+        },
+        {
+          header: "stato",
+          accessorFn: row => row.stato,
+          footer: props => props.column.id,
+        },
+        {
+          header: " ",
+          footer: props => props.column.profilo,
+          cell: (info) => {
+            return (
+                <Dropdown
+                    element={<EllipsisVerticalIcon className="h-6 w-6 text-emerald-800 font-bold" aria-hidden="true" />}
+                    options={[
+                        {
+                            name: <div className='flex'>
+                                <FaRegEdit className="h-5 w-5 text-orange-500 justify-start" />
+                                <span className='justify-end ml-2'>Modifica</span>
+                            </div>,
+                            props: {
+                                onClick: () => {
+                                    setOpen(true);
+                                    setDatiForm(info.row.original)
+                                },
+                                to: '#'
+                            }
+                        },
+                        {
+                            name: <div className='flex'>
+                                <FaRegTrashAlt  className="h-5 w-5 text-red-600 justify-start" />
+                                <span className='justify-end ml-2'>Elimina</span>
+                            </div>,
+                            props: {
+                                onClick: () => {
+                                    setDatiAlert({
+                                        title: `Vuoi eliminare il corriere ${info.row.original.utente}`,
+                                        open: true,
+                                        typeIcona:'question',
+                                        onConfirm: () => onConfirmDelete(info.row.original.uuid_utente),
+                                        buttonVariantConfirm: 'red',
+                                        confirmText: 'Elimina'
+                                    })
+    
+                                },
+                                to: '#'
+                            }
+                        },
+                    
+                    ]} 
+                />
+            )
+          },
+        }
+    ]  
+
+    const getCorrieri = async () => {
+        const { data } = await clientAxios('/couriers')
+        setCorrieri(data)
     }
 
-    const openModalSch = () => {
-        setIsOpenSch(true);
-    }    
-        
-    const [couriers, setCouriers] = useState([]);
- 
-    const getCouriers = async () => {
-      try {
-        const response = await fetch(engine.backend+'/couriers');
-        const data = await response.json();
-        setCouriers(data);
-      } catch (err) {
-        console.log(err);
-      }
-    };
-  
     useEffect(() => {
-      getCouriers()
-    }, []);
+        getCorrieri();
+    }, [])
+
+    let customProps = {
+        classTable: '',
+        striped: false,
+        rowline: true
+    }
+
+    const addProps = {
+        text: 'Nuovo',
+        onClick: () => setOpen(true)
+    }
 
     return (
         <>
             <div className="my-4">
-                <div className='uppercase font-semibold pl-4 flex flex-row'>
-                    <div className="basis-1/2 pt-3">Corrieri</div>
-                    <div className="basis-1/2 text-end">
-                        <Button  variant="add" text="Add Corriere" onClick={openModal}/>
-                    </div>               
-                </div>
+                <ModalCorrieri open={open} setOpen={setOpen} getRow={getCorrieri} datiForm={datiForm} setDatiForm={setDatiForm} titleModal='Modifica corriere' />   
                 <div className='bg-neutral-100 p-4 mt-2'> 
-                    <DataTable 
-                    columns={colCorrieri}
-                    data={couriers}
-                    selectableRows
-                    />
-                </div>             
-            </div>
-            <CorrieriAdd isOpen={isOpen}  setIsOpen={(bool) => setIsOpen(bool)}/>
-            <CorrieriSch isOpenSch={isOpenSch} corriere={corriere}  setIsOpenSch={(bool) => setIsOpenSch(bool)}/>  
-        </>    
+                    <DataTable title="Tabella corrieri" 
+                            data={corrieri} 
+                            columns={columns} 
+                            customProps={customProps} search searchColumns pagination ordering addProps={addProps}/>
+                </div>
+            </div>    
+        </>   
     )
 }
 

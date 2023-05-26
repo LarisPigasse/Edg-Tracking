@@ -5,51 +5,12 @@ import ModalOperatori from "../components/modal/ModalOperatori"
 import { EllipsisVerticalIcon} from '@heroicons/react/24/solid'
 import {FaRegEdit, FaRegTrashAlt} from 'react-icons/fa'
 import clientAxios from "../config/clientAxios"
-import Button from "./Button";
 
 function Operatori() {
 
     const [open, setOpen] = useState(false);
-    const [datiForm, setDatiForm] = useState({})
-    const [operatori, setOperatori] = useState([])
-
-    const optionsDropdown = [
-        {
-            name: <div className='flex'>
-                <FaRegEdit className="h-5 w-5 text-orange-500 justify-start" aria-hidden="true" />
-                <span className='justify-end ml-3 mt-0.5'>Modifica</span>
-            </div>,
-            props: {
-                onClick: () => {
-                    setOpen(true);
-                    setDatiForm(info.row.original)
-                },
-                to: '#'
-            }
-        },
-        {
-            name: <div className='flex'>
-                <FaRegTrashAlt className="h-5 w-5 text-red-600 justify-start" aria-hidden="true" />
-                <span className='justify-end ml-3 mt-0.5'>Elimina</span>
-            </div>,
-            props: {
-                onClick: () => {
-
-                    setDatiAlert({
-                        title: `Vuoi eliminare l'utente ${info.row.original.utente}`,
-                        open: true,
-                        typeIcona:'question',
-                        onConfirm: () => onConfirmDelete(info.row.original.uuid_utente),
-                        buttonVariantConfirm: 'red',
-                        confirmText: 'Elimina'
-                    })
-
-                },
-                to: '#'
-            }
-        },
-    
-    ]
+    const [datiForm, setDatiForm] = useState({});
+    const [operatori, setOperatori] = useState([]);
 
     const columns = [
         {
@@ -76,12 +37,46 @@ function Operatori() {
           header: " ",
           footer: props => props.column.profilo,
           cell: (info) => {
-            console.log(info)
             return (
                 <Dropdown
-                    element={<EllipsisVerticalIcon className="h-6 w-6 text-emerald-800 font-bold" aria-hidden="true" />}
-                    options={ optionsDropdown }
-                />
+                element={<EllipsisVerticalIcon className="h-6 w-6 text-emerald-800 font-bold" aria-hidden="true" />}
+                options={[
+                    {
+                        name: <div className='flex'>
+                            <FaRegEdit className="h-5 w-5 text-orange-500 justify-start" />
+                            <span className='justify-end ml-2'>Modifica</span>
+                        </div>,
+                        props: {
+                            onClick: () => {
+                                setOpen(true);
+                                setDatiForm(info.row.original)
+                            },
+                            to: '#'
+                        }
+                    },
+                    {
+                        name: <div className='flex'>
+                            <FaRegTrashAlt  className="h-5 w-5 text-red-600 justify-start" />
+                            <span className='justify-end ml-2'>Elimina</span>
+                        </div>,
+                        props: {
+                            onClick: () => {
+                                setDatiAlert({
+                                    title: `Vuoi eliminare l'operatore ${info.row.original.utente}`,
+                                    open: true,
+                                    typeIcona:'question',
+                                    onConfirm: () => onConfirmDelete(info.row.original.uuid_utente),
+                                    buttonVariantConfirm: 'red',
+                                    confirmText: 'Elimina'
+                                })
+
+                            },
+                            to: '#'
+                        }
+                    },
+                
+                ]}
+            />
             )
           },
         }
@@ -103,7 +98,7 @@ function Operatori() {
     }
 
     const addProps = {
-        text: 'Genera',
+        text: 'Nuovo',
         onClick: () => setOpen(true)
     }
 

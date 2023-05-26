@@ -1,93 +1,120 @@
-import { useState, useEffect } from "react";
-import DataTable from '../data/MyDataTables';
-import engine from '../engine'
-import ClientiAdd from "../modals/ClientiAdd";
-import ClientiSch from "../modals/ClientiSch";
-import {Link} from 'react-router-dom'
-import Button from '../components/Button'
+import { useEffect, useState } from "react"
+import DataTable from "../components/DataTable"
+import Dropdown from "../components/Dropdown"
+import ModalClienti from "../components/modal/ModalClienti"
+import { EllipsisVerticalIcon} from '@heroicons/react/24/solid'
+import {FaRegEdit, FaRegTrashAlt} from 'react-icons/fa'
+import clientAxios from "../config/clientAxios"
 
 function Clienti() {
 
-    const colClienti = [
-        {
-            name: 'ID',
-            selector: row => row.id_cliente,
-            sortable: true,
-            maxWidth: '4%',
-        },
-        {
-            name: 'CLIENTE',
-            selector: row => row.cliente,
-            sortable: true,
-            cell: (row, index, column, id) => (<><Link to={''} onClick={() => { openModalSch(); setCliente(row.cliente);}}>{row.cliente}</Link></>),
-            style: {
-                color: "#0EA5E9",
-                fontWeight: "500",
-              },            
-        },
-        {
-            name: 'PARTITA IVA',
-            selector: row => row.partita_iva,
-            sortable: true,
-            maxWidth: '16%',
-        },
-        {
-            name: 'STATO',
-            selector: row => row.stato,
-            sortable: true,
-            maxWidth: '4%',
-        },     
-    ]
+    const [open, setOpen] = useState(false);
+    const [datiForm, setDatiForm] = useState({})
+    const [clienti, setClienti] = useState([])
 
-    const [isOpen, setIsOpen] = useState(false)
-    const [isOpenSch, setIsOpenSch] = useState(false)
-    const [cliente, setCliente] = useState(); 
+    const columns = [
+        {
+          header: "id",
+          accessorFn: row => row.id_cliente,
+          footer: props => props.column.id,
+        },
+        {
+          header: "cliente",
+          accessorFn: row => row.cliente,
+          footer: props => props.column.id,
+        },
+        {
+          header: "partita iva",
+          accessorFn: row => row.partita_iva,
+          footer: props => props.column.id,
+        },
+        {
+          header: "stato",
+          accessorFn: row => row.stato,
+          footer: props => props.column.id,
+        },
+        {
+          header: " ",
+          footer: props => props.column.profilo,
+          cell: (info) => {
+            return (
+                <Dropdown
+                    element={<EllipsisVerticalIcon className="h-6 w-6 text-emerald-800 font-bold" aria-hidden="true" />}
+                    options={[
+                        {
+                            name: <div className='flex'>
+                                <FaRegEdit className="h-5 w-5 text-orange-500 justify-start" />
+                                <span className='justify-end ml-2'>Modifica</span>
+                            </div>,
+                            props: {
+                                onClick: () => {
+                                    setOpen(true);
+                                    setDatiForm(info.row.original)
+                                },
+                                to: '#'
+                            }
+                        },
+                        {
+                            name: <div className='flex'>
+                                <FaRegTrashAlt  className="h-5 w-5 text-red-600 justify-start" />
+                                <span className='justify-end ml-2'>Elimina</span>
+                            </div>,
+                            props: {
+                                onClick: () => {
+                                    setDatiAlert({
+                                        title: `Vuoi eliminare il vettore ${info.row.original.utente}`,
+                                        open: true,
+                                        typeIcona:'question',
+                                        onConfirm: () => onConfirmDelete(info.row.original.uuid_utente),
+                                        buttonVariantConfirm: 'red',
+                                        confirmText: 'Elimina'
+                                    })
+    
+                                },
+                                to: '#'
+                            }
+                        },
+                    
+                    ]} 
+                />
+            )
+          },
+        }
+    ]  
 
-    const openModal = () => {
-        setIsOpen(true);
+    const getClienti = async () => {
+        const { data } = await clientAxios('/customers')
+        setClienti(data)
     }
 
-    const openModalSch = () => {
-        setIsOpenSch(true);
-    }
-
-    const [customers, setCustomers] = useState([]);
- 
-    const getCustomers = async () => {
-      try {
-        const response = await fetch(engine.backend+'/customers');
-        const data = await response.json();
-        setCustomers(data);
-      } catch (err) {
-        console.log(err);
-      }
-    };
-  
     useEffect(() => {
-      getCustomers()
-    }, []);
+        getClienti();
+    }, [])
+
+    let customProps = {
+        classTable: '',
+        striped: false,
+        rowline: true
+    }
+
+    const addProps = {
+        text: 'Nuovo',
+        onClick: () => setOpen(true)
+    }
 
     return (
         <>
             <div className="my-4">
-                <div className='uppercase font-semibold pl-4 flex flex-row'>
-                    <div className="basis-1/2 pt-3">Clienti</div>
-                    <div className="basis-1/2 text-end">
-                        <Button variant="add" text="Add cliente" onClick={openModal}/>
-                    </div>               
-                </div>
+                <ModalClienti open={open} setOpen={setOpen} getRow={getClienti} datiForm={datiForm} setDatiForm={setDatiForm} titleModal='Modifica clienti' />   
                 <div className='bg-neutral-100 p-4 mt-2'> 
-                    <DataTable 
-                    columns={colClienti}
-                    data={customers}
-                    selectableRows
-                    />
-                </div>             
-            </div>
-            <ClientiAdd isOpen={isOpen}  setIsOpen={(bool) => setIsOpen(bool)}/>
-            <ClientiSch isOpenSch={isOpenSch} titolo={cliente}  setIsOpenSch={(bool) => setIsOpenSch(bool)}/>
-        </>    
-    )
+                    <DataTable title="Tabella clienti" 
+                            data={clienti} 
+                            columns={columns} 
+                            customProps={customProps} search searchColumns pagination ordering addProps={addProps}/>
+                </div>
+            </div>    
+        </>
+      )
 }
 
 export default Clienti

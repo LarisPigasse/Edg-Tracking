@@ -90,8 +90,7 @@ export default function App( { title, data : dataRemote, columns: columnsRemote,
                                           <DebouncedInput
                                               value={globalFilter ?? ""}
                                               onChange={value => setGlobalFilter(String(value))}
-                                              className="p-2 border shadow-2xl rounded-md border-gray-300 sm:text-sm
-                                focus:border-emerald-700 focus:ring-emerald-700"
+                                              className="p-2 border shadow-2xl rounded-md border-gray-300 sm:text-sm focus:border-emerald-700 focus:ring-emerald-700"
                                               placeholder="Ricerca..."
                                           />
                                       </div>
@@ -230,13 +229,6 @@ export default function App( { title, data : dataRemote, columns: columnsRemote,
                         }
 
                         <div>{table.getPrePaginationRowModel().rows.length} Rows</div>
-                        {/* <div>
-                            <button onClick={() => rerender()}>Force Rerender</button>
-                        </div>
-                        <div>
-                            <button onClick={() => console.log('index')}>Refresh Data</button>
-                        </div>
-                        <pre>{JSON.stringify(table.getState(), null, 2)}</pre> */}
                 </div>
             </div>
         </div>
