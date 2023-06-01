@@ -1,5 +1,5 @@
 import { useState, useEffect, createContext } from 'react'
-import clienteTokenAxios from '../config/clienteTokenAxios';
+import clienteTokenAxios from '../config/clientAxiosToken';
 
 const AuthContext = createContext();
 
@@ -9,16 +9,17 @@ const AuthProvider = ({children}) => {
     const [loading, setLoading] = useState(true)
 
     useEffect(() => {
-        const autenticarUsuario = async () => {
+        const autenticareUtente = async () => {
 
             const token = localStorage.getItem('token')
+
             if(!token){
                  setLoading(false)
                  return
             }
 
             try {
-                const { data } = await clienteTokenAxios('utenti/auth/profilo')
+                const { data } = await clienteTokenAxios('auth/profilo')
 
                 if(data){
                     setAuth(data)
@@ -26,15 +27,15 @@ const AuthProvider = ({children}) => {
 
             } catch (error) {
                 setAuth({})
-            } 
+            }
 
             setLoading(false)
 
         }
-        autenticarUsuario()
+        autenticareUtente()
     }, [])
 
-    const cerrarSesionAuth = () => {
+    const chiudiSessione = () => {
         setAuth({})
     }
 
@@ -44,7 +45,7 @@ const AuthProvider = ({children}) => {
                 auth,
                 setAuth,
                 loading,
-                cerrarSesionAuth
+                chiudiSessione
             }}
         >
             {children}

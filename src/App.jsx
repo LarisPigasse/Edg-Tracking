@@ -4,6 +4,10 @@ import './assets/css/custom.css'
 import {RouterProvider} from 'react-router-dom'
 import Router from './Router'
 
+import {AuthProvider} from './context/AuthProvider' 
+
 ReactDOM.createRoot(document.getElementById('root')).render(
-  <RouterProvider router={Router} />
+  <AuthProvider>
+    <RouterProvider router={Router} />
+  </AuthProvider>
 )
