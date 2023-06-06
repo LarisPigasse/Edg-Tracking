@@ -23,10 +23,10 @@ function Tracking() {
         <TabsBody>
           <TabPanel key="spedizioni" value="spedizioni" className="px-0">
             <Spedizioni/>
-          </TabPanel>
+          </TabPanel> 
           <TabPanel key="aggiorna" value="aggiorna" className="px-0">
             <AggiornaSpedizioni/>
-          </TabPanel>                                           
+          </TabPanel>                                                  
         </TabsBody>
       </Tabs>
     </div>
